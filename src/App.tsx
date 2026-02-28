@@ -322,13 +322,13 @@ export function App() {
               {/* Template selector */}
               <div className="mt-5 card-surface p-5 animate-slide-up" style={{ animationDelay: '120ms' }}>
                 <h3 className="mb-4 text-sm font-semibold text-gray-800 tracking-tight">Resume Template</h3>
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 p-1">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 p-2">
                   {templates.map((t) => (
                     <button
                       key={t.id}
                       onClick={() => setTemplate(t.id)}
                       className={cn(
-                        'btn-apple relative overflow-hidden rounded-2xl border-2 p-4 text-left transition-all flex flex-col gap-2',
+                        'btn-apple relative rounded-2xl border-2 p-4 text-left transition-all flex flex-col gap-2',
                         template === t.id
                           ? 'border-pink-400 bg-pink-50/60 ring-2 ring-pink-300/30'
                           : 'border-transparent bg-gray-50 hover:bg-white hover:border-gray-200'
