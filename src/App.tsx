@@ -322,7 +322,7 @@ export function App() {
               {/* Template selector */}
               <div className="mt-5 card-surface p-5 animate-slide-up" style={{ animationDelay: '120ms' }}>
                 <h3 className="mb-4 text-sm font-semibold text-gray-800 tracking-tight">Resume Template</h3>
-                <div className="grid grid-cols-4 gap-3">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                   {templates.map((t) => (
                     <button
                       key={t.id}
