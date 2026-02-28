@@ -1,0 +1,293 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --apple-blue: #007AFF;
+  --apple-purple: #5856D6;
+  --apple-indigo: #5E5CE6;
+  --apple-bg: #F2F2F7;
+  --apple-surface: rgba(255, 255, 255, 0.85);
+  --apple-border: rgba(0, 0, 0, 0.08);
+  --apple-shadow: 0 4px 30px rgba(0, 0, 0, 0.06);
+  --spring-timing: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--apple-bg);
+}
+
+/* ============ Keyframe Animations ============ */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes pulseShadow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(99, 102, 241, 0.4);
+  }
+
+  50% {
+    box-shadow: 0 0 0 10px rgba(99, 102, 241, 0);
+  }
+}
+
+/* ============ Animation Utility Classes ============ */
+.animate-fade-in {
+  animation: fadeIn 0.45s var(--ease-out-expo) both;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.45s var(--ease-out-expo) both;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.4s var(--spring-timing) both;
+}
+
+.animate-slide-down {
+  animation: fadeSlideDown 0.35s var(--ease-out-expo) both;
+}
+
+.animate-spin-smooth {
+  animation: spin 0.8s linear infinite;
+}
+
+.animate-pulse-shadow {
+  animation: pulseShadow 2s ease-in-out infinite;
+}
+
+/* ============ Glass Surface ============ */
+.glass {
+  background: rgba(255, 255, 255, 0.80);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.glass-dark {
+  background: rgba(17, 17, 27, 0.75);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ============ Apple-Style Buttons ============ */
+.btn-apple {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: transform 0.18s var(--spring-timing), box-shadow 0.18s ease, opacity 0.15s ease;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn-apple:hover {
+  transform: scale(1.03);
+}
+
+.btn-apple:active {
+  transform: scale(0.96);
+}
+
+.btn-primary {
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  color: white;
+  box-shadow: 0 4px 16px rgba(220, 39, 67, 0.40);
+}
+
+.btn-primary:hover {
+  box-shadow: 0 6px 22px rgba(220, 39, 67, 0.55);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.9);
+  color: #374151;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.10);
+}
+
+/* ============ Segmented Control (iOS-style tabs) ============ */
+.segmented-control {
+  position: relative;
+  display: flex;
+  background: rgba(116, 116, 128, 0.12);
+  border-radius: 14px;
+  padding: 3px;
+  gap: 2px;
+}
+
+.segmented-indicator {
+  position: absolute;
+  top: 3px;
+  height: calc(100% - 6px);
+  background: white;
+  border-radius: 11px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.13);
+  transition: left 0.3s var(--spring-timing), width 0.3s var(--spring-timing);
+  pointer-events: none;
+}
+
+.segmented-tab {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  padding: 0.45rem 0.85rem;
+  border-radius: 11px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: color 0.2s ease, opacity 0.15s ease;
+  cursor: pointer;
+  user-select: none;
+  border: none;
+  background: transparent;
+}
+
+.segmented-tab.active {
+  color: #111827;
+  font-weight: 600;
+}
+
+.segmented-tab:not(.active) {
+  color: #6B7280;
+}
+
+.segmented-tab:not(.active):hover {
+  color: #374151;
+}
+
+.segmented-tab:active {
+  opacity: 0.7;
+}
+
+/* ============ Card Surfaces ============ */
+.card-surface {
+  background: white;
+  border-radius: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 4px 20px rgba(0, 0, 0, 0.04);
+  transition: box-shadow 0.2s ease, transform 0.2s var(--spring-timing);
+}
+
+.card-surface:hover {
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.07), 0 8px 28px rgba(0, 0, 0, 0.07);
+}
+
+/* ============ Input Styling ============ */
+input,
+textarea,
+select {
+  font-family: 'Inter', sans-serif;
+}
+
+/* ============ Scrollbar ============ */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.25);
+}
+
+/* ============ Loading shimmer ============ */
+.shimmer {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e4e4e4 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+}
