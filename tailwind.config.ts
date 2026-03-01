@@ -5,7 +5,11 @@ const config: Config = {
         "./src/**/*.{js,ts,jsx,tsx,mdx}",
     ],
     theme: {
-        extend: {},
+        extend: {
+            screens: {
+                'lg': '1100px',
+            },
+        },
     },
     plugins: [],
 };

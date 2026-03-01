@@ -7,6 +7,13 @@ export const metadata: Metadata = {
     description: "Create professional resumes with AI-powered features using OpenRouter",
 };
 
+export const viewport = {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 1,
+    themeColor: "#007AFF",
+};
+
 export default function RootLayout({
     children,
 }: Readonly<{
