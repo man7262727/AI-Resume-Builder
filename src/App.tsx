@@ -100,8 +100,10 @@ export function App() {
   const [tabKey, setTabKey] = useState(0); // force re-mount for animation
   const printRef = useRef<HTMLDivElement>(null);
   const tabBarRef = useRef<HTMLDivElement>(null);
+  const previewContainerRef = useRef<HTMLDivElement>(null);
 
-  // iOS indicator positioning
+  // Dynamic scaling for preview
+  const [previewScale, setPreviewScale] = useState(0.58);
   const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0 });
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
@@ -121,6 +123,24 @@ export function App() {
   useLayoutEffect(() => {
     updateIndicator();
   }, [activeTab, updateIndicator]);
+
+  useLayoutEffect(() => {
+    const container = previewContainerRef.current;
+    if (!container) return;
+
+    const updateScale = () => {
+      const containerWidth = container.offsetWidth;
+      // 816px is approx 8.5 inches at 96 DPI
+      const newScale = Math.min(1, containerWidth / 816);
+      setPreviewScale(newScale);
+    };
+
+    const observer = new ResizeObserver(updateScale);
+    observer.observe(container);
+    updateScale();
+
+    return () => observer.disconnect();
+  }, []);
 
   const {
     resumeData,
@@ -378,8 +398,17 @@ export function App() {
                     <span className="text-xs font-medium text-gray-400">Auto-updating</span>
                   </div>
                 </div>
-                <div className="overflow-hidden rounded-2xl border border-white/70 bg-gray-100 shadow-xl shadow-gray-200/60">
-                  <div className="transform scale-[0.58] origin-top-left" style={{ width: '172.4%' }}>
+                <div
+                  ref={previewContainerRef}
+                  className="overflow-hidden rounded-2xl border border-white/70 bg-gray-100 shadow-xl shadow-gray-200/60"
+                >
+                  <div
+                    className="origin-top-left transition-transform duration-200"
+                    style={{
+                      transform: `scale(${previewScale})`,
+                      width: `${(1 / previewScale) * 100}%`
+                    }}
+                  >
                     <ResumePreview ref={printRef} data={resumeData} template={template} />
                   </div>
                 </div>
